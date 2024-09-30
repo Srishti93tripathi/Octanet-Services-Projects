@@ -1,0 +1,77 @@
+<% layout("/layouts/boilerplate.ejs") -%> 
+<body>
+    <header class="header__container">
+        
+        <div class="header__content">
+          <h1>Add Your <span>Tasks</span> For Today.</h1>
+          <p>
+            "Plan smarter, achieve more – your productivity partner is here!"
+          </p>
+        </div>
+        <form action="/tasks" method="post" class="row g-3 needs-validation offset-2" novalidate>
+        <div class="col-md-4 position-relative">
+          <label for="validationCustom03" class="form-label">Add your Task</label>
+          <input type="text" name="task[data]" class="form-control" id="validationCustom03" required>
+          <div class="invalid-feedback position-absolute">
+            Please provide a valid city.
+          </div>
+        </div>
+        <div class="col-md-2 position-relative">
+          <label for="validationCustom04" class="form-label">Date</label>
+          <input class="form-control" name="task[date]" type="date" id="validationCustom04" required>
+          <div class="invalid-feedback position-absolute">
+            Please select a valid date.
+          </div>
+        </div>
+        <div class="col-md-2 position-relative">
+          <label for="validationCustom05" class="form-label">Time</label>
+          <input type="time" class="form-control" name="task[time]" id="validationCustom05" required>
+          <div class="invalid-feedback position-absolute">
+            Please enter time.
+          </div>
+        </div>
+        <div class="col-md-2 align-self-end">
+          <button class="btn btn-dark" type="submit" style="margin-right: 60px !important; ">Add Task</button>
+        </div>
+      </form>
+        <!-- <form action="/tasks" method="post" novalidate class="row g-3 needs-validation">
+          <div class="input-group col-6">
+            <input type="text" name="task[data]" class=" form-control task-box" placeholder="Add Your Task" aria-label="Add your Task" aria-describedby="button-addon2" required>
+            <div class="invalid-feedback">
+              Please enter a task.
+            </div>
+          </div>
+          <div class="col-3">
+            <input type="date" class=" form-control date-box" id="dateInput" name="task[date]" required>
+            <div class="invalid-feedback"></div>
+              Please enter a date.
+            </div>
+          </div>
+          <div class="col-3">  
+            <input type="time" class=" form-control time-box" id="timeInput" name="task[time]" required>
+            <div class="invalid-feedback"></div>
+              Please enter a time.
+            </div>
+          </div>  
+            <button class="btn btn-outline-secondary btn-dark" type="submit" id="add-Btn">Add</button>
+          </div>  
+      </form> -->
+      <ul class="list-group" id="list">
+      <% for (task of tasks) { %>
+        
+            <li class="list-group-item mb-2" id="list-item">
+              <input class="form-check-input me-1" type="checkbox" value="" id="checkBox">
+              <label class="form-check-label" for="firstCheckbox"><%= task.data %></label>
+              <p><%= task.date.toLocaleDateString("en-IN")%></p>
+              <p><%= task.time %></p>
+        
+             <form action="/tasks/<%= task._id %>?_method=DELETE" method="post">
+              <button class="btn btn-dark" type="submit">Delete</button>
+            </form>
+            </li>
+            
+            <% } %>
+          </ul>
+          
+    </header>
+</body>
