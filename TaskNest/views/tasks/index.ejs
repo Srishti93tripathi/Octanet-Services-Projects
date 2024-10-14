@@ -1,4 +1,4 @@
-<% layout("/layouts/boilerplate.ejs") -%> 
+<% layout("/layouts/boilerplate.ejs") -%>
 <body>
     <header class="header__container">
         
@@ -56,9 +56,10 @@
             <button class="btn btn-outline-secondary btn-dark" type="submit" id="add-Btn">Add</button>
           </div>  
       </form> -->
+      
       <ul class="list-group" id="list">
       <% for (task of tasks) { %>
-        
+        <% if(currUser && currUser._id.equals(task.author)) { %>
             <li class="list-group-item mb-2" id="list-item">
               <input class="form-check-input me-1" type="checkbox" value="" id="checkBox">
               <label class="form-check-label" for="firstCheckbox"><%= task.data %></label>
@@ -69,9 +70,9 @@
               <button class="btn btn-dark" type="submit">Delete</button>
             </form>
             </li>
-            
+            <% } %>
             <% } %>
           </ul>
-          
+         
     </header>
 </body>
